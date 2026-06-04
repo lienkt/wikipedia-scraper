@@ -28,9 +28,9 @@ def main():
   # ---------------------------------------
   # Choose input file mode
   # ---------------------------------------
-  logger.info("\n=== Choose output file type to store the list of leaders ===")
-  logger.info("1. CSV")
-  logger.info("2. JSON")
+  print("\n=== Choose output file type to store the list of leaders ===")
+  print("1. CSV")
+  print("2. JSON")
 
   while True:
     choise_filepath = input("Choose an option: ")
