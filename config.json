@@ -1,0 +1,6 @@
+{
+  "base_url": "https://country-leaders.onrender.com",
+  "country_endpoint": "/countries",
+  "leaders_endpoint": "/leaders",
+  "cookies_endpoint": "/cookie"
+}
