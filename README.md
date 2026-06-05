@@ -17,17 +17,20 @@ The project was developed as part of a collaborative data engineering exercise u
 ## Repo Structure
 ```text
 wikipedia-scraper/
-├── main.py
-├── requirements.txt
-├── README.md
-├── leaders.json
 ├── dev/
 │   ├── student_lien_sandbox.ipynb
 │   └── student_sitara_sandbox.ipynb
-└── src/
-    ├── __init__.py
-    ├── api_client.py
-    └── HTML_scraper.py
+├── src/
+|   ├── __init__.py
+|   ├── api_client.py
+|   └── HTML_scraper.py
+├── main.py
+├── requirements.txt
+├── .gitignore
+├── README.md
+├── config.json
+├── leaders.CSV
+└── leaders.json
 ```
 ## Architecture
 
