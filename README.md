@@ -14,12 +14,13 @@ The project was developed as part of a collaborative data engineering exercise u
 - Error handling for API and scraping requests
 - Modular code structure
 
-## Project Structure
+## Repo Structure
 ```text
 wikipedia-scraper/
 ├── main.py
 ├── requirements.txt
 ├── README.md
+├── leaders.json
 ├── dev/
 │   ├── student_lien_sandbox.ipynb
 │   └── student_sitara_sandbox.ipynb
