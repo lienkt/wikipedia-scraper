@@ -77,11 +77,16 @@ class HTMLScraper:
     h1 = soup.find("h1", id="firstHeading")
     span = h1.find("span", class_="mw-page-title-main") if h1 else None
     page_title = span.get_text(strip=True) if span else ""
+    
     if "," in page_title:
-        title_first_word = page_title.split(",", 1)[0].strip()
+        parts = page_title.split(",", 1)
+        title_first_word = parts[0].strip()
+        title_last_word = parts[-1].strip()
     else:
         parts = page_title.split()
         title_first_word = parts[0] if parts else ""
+        title_last_word = parts[-1].strip() if parts else ""
+
     if content:
       parser_output = content.find("div", class_="mw-parser-output")
       if parser_output:
@@ -93,7 +98,10 @@ class HTMLScraper:
 
             if b_tag:
               bold_text = b_tag.get_text()
-              if self.normalize(title_first_word) in self.normalize(bold_text):
+              if (
+                self.normalize(title_first_word) in self.normalize(bold_text)
+                or self.normalize(title_last_word) in self.normalize(bold_text)
+              ):
                 return text
 
     return ""
