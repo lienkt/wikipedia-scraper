@@ -27,7 +27,7 @@ wikipedia-scraper/
 └── src/
     ├── __init__.py
     ├── api_client.py
-    └── html_scraper.py
+    └── HTML_scraper.py
 ```
 ## Architecture
 
@@ -69,43 +69,7 @@ flowchart TB
 
 ```
 
-## Component Architecture
 
-
-```mermaid
-classDiagram
-
-    class main {
-        +main()
-    }
-
-    class APIClient {
-        +get_countries()
-        +get_leaders(country)
-        +refresh_cookie()
-    }
-
-    class html_scraper {
-        +fetch_html()
-        +get_first_paragraph()
-        +clean_text()
-        +to_json_file()
-    }
-
-    class config {
-        config.json
-    }
-
-    class output {
-        leader.json
-        leader.csv
-    }
-
-    main --> config
-    main --> APIClient
-    main --> html_scraper
-    main --> output
-```
 ## Installation
 
 -  Clone the repository
