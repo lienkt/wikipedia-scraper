@@ -68,13 +68,13 @@ flowchart TB
 
 ```
 ## Workflow
-API client fetches country list
-For each country → fetch leaders
-Extract Wikipedia URLs
-Scraper downloads HTML pages
-Extract first valid paragraph
-Clean text and structure data
-Save final dataset
+- API client fetches country list
+- For each country → fetch leaders
+- Extract Wikipedia URLs
+- Scraper downloads HTML pages
+- Extract first valid paragraph
+- Clean text and structure data
+- Save final dataset
 
 ## Component Architecture
 
