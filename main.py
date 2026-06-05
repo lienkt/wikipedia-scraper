@@ -1,8 +1,7 @@
 
 import os
 import json
-from src.api_client import APIClient
-from src.html_scraper import clean_text, fetch_html, get_first_paragraph, to_json_file
+from src import APIClient, HTMLScraper
 import logging
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -33,20 +32,23 @@ def main():
   print("2. JSON")
 
   while True:
-    choise_filepath = input("Choose an option: ")
+    choice_filepath = input("Choose an option: ")
 
-    if choise_filepath == "2":
+    if choice_filepath == "1":
+       break
+    elif choice_filepath == "2":
       output_filepath = os.path.join(base_dir, "leader.json")
-    if not choise_filepath in ["1","2"]:
+      break
+    else:
       logger.info("Options are 1 or 2. Please choose again.")
       continue
-    break
 
   # ---------------------------------------
   # Get countries and leaders from API
   # ---------------------------------------
   logger.info("Fetching data from API...")
   api_client = APIClient(config)
+  scraper = HTMLScraper(api_client.session)
   countries = api_client.get_countries()
   leaders_per_country = {}
   for country in countries:
@@ -55,8 +57,12 @@ def main():
 
     for leader in leaders:
         logger.info(f"Processing {leader['first_name']} {leader['last_name']} from {country}...")
-        html = fetch_html(leader["wikipedia_url"], api_client.session)
-        leader["intro"] = clean_text(get_first_paragraph(html))
+        html = scraper.fetch_html(leader["wikipedia_url"])
+        if html:
+          paragraph = scraper.get_first_paragraph(html)
+          leader["intro"] = HTMLScraper.clean_text(paragraph) if paragraph else ""
+        else:
+          leader["intro"] = ""
 
     leaders_per_country[country] = leaders
 
@@ -64,7 +70,7 @@ def main():
   # Save leaders of countries to JSON file
   # ---------------------------------------
   logger.info(f"Saving data to {output_filepath}...")
-  to_json_file(leaders_per_country, output_filepath)
+  HTMLScraper.to_json_file(leaders_per_country, output_filepath)
 
 # ---------------------------------------
 # Program entry point

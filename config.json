@@ -2,5 +2,6 @@
   "base_url": "https://country-leaders.onrender.com",
   "country_endpoint": "/countries",
   "leaders_endpoint": "/leaders",
-  "cookies_endpoint": "/cookie"
+  "cookies_endpoint": "/cookie",
+  "user_agent": "MyWikiProject/1.0 (contact: lienkt0110@gmail.com)"
 }
