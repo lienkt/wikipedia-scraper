@@ -3,40 +3,38 @@ class APIClient:
   """APIClient is responsible for communicating with the country leaders API.
    It handles fetching the list of countries and their leaders, as well as managing cookies for authentication.
    """
-  def __init__(self, config):
+  def __init__(self, config: dict):
     """Initialize the API client with configuration.
     args:
       config (dict): A dictionary containing API configuration, including base URL and endpoints. 
     """
-    self.base_url = config["base_url"]
+    self.base_url = config["base_url"].rstrip("/")
     self.country_endpoint = config["country_endpoint"]
     self.leaders_endpoint = config["leaders_endpoint"]
     self.cookies_endpoint = config["cookies_endpoint"]
     self.session = requests.Session()
-    self.cookies = None
+    self.refresh_cookie()
+    
           
-  def refresh_cookie(self) -> dict:
-    """Fetch a new cookie from the API and store it for future requests.
-    Returns:
-      dict: The new cookie obtained from the API.
-    """
-    response = self.session.get(f"{self.base_url}{self.cookies_endpoint}")
-    response.raise_for_status()
-    self.cookies = response.cookies
-    return self.cookies
+  def refresh_cookie(self) -> None:
+        """Fetch and store fresh cookies in the session."""
+        url = f"{self.base_url}{self.cookies_endpoint}"
+        response = self.session.get(url)
+        response.raise_for_status()
+
+        # Session automatically stores cookies
+        return
 
   def get_countries(self) -> list:
     """Fetch the list of countries from the API.
       Returns:
         list: A list of country names obtained from the API.
       """
-    if not self.cookies:
-        self.refresh_cookie()
+    self.refresh_cookie()
 
     response = self.session.get(
-        f"{self.base_url}{self.country_endpoint}",
-        cookies=self.cookies
-    )
+            f"{self.base_url}{self.country_endpoint}"
+        )
     response.raise_for_status()
     return response.json()
 
@@ -47,13 +45,11 @@ class APIClient:
     Returns:
       list: A list of leaders for the specified country obtained from the API.
     """
-    if not self.cookies:
-        self.refresh_cookie()
+    self.refresh_cookie()
 
     response = self.session.get(
-        f"{self.base_url}{self.leaders_endpoint}",
-        params={"country": country},
-        cookies=self.cookies
-    )
+    f"{self.base_url}{self.leaders_endpoint}",
+            params={"country": country}
+        )
     response.raise_for_status()
     return response.json()
