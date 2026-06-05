@@ -21,8 +21,8 @@ wikipedia-scraper/
 ├── requirements.txt
 ├── README.md
 ├── dev/
-│   ├── student_a_sandbox.ipynb
-│   └── student_b_sandbox.ipynb
+│   ├── student_lien_sandbox.ipynb
+│   └── student_sitara_sandbox.ipynb
 └── src/
     ├── __init__.py
     ├── api_client.py
@@ -67,14 +67,6 @@ flowchart TB
 ```mermaid
 
 ```
-## Workflow
-- API client fetches country list
-- For each country → fetch leaders
-- Extract Wikipedia URLs
-- Scraper downloads HTML pages
-- Extract first valid paragraph
-- Clean text and structure data
-- Save final dataset
 
 ## Component Architecture
 
@@ -135,7 +127,7 @@ python main.py
 The script will:
 
 - Load API configuration from config.json
-- Connect to the Country Leaders APIRetrieve all available countries
+- Connect to the Country Leaders API
 - Retrieve leaders for each country
 - Scrape each leader's Wikipedia page
 - Extract and clean the first meaningful paragraph
@@ -152,7 +144,12 @@ This project was completed as part of the **AI Bootcamp** at **BeCode.org**. The
 ## Contributors
 
 - 1. Lien Kim
+
+    https://www.linkedin.com/in/lienkt0110/
+
 - 2. Sitara Sachidanandan
+
+    https://www.linkedin.com/in/sitara-sachidanandan/
 
 
 
