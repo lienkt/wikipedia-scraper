@@ -55,7 +55,7 @@ flowchart TB
 
     API --> COUNTRY_API[Country Leaders API]
 
-    MAIN --> SCRAPER[html_scraper.py]
+    MAIN --> SCRAPER[html_scraper]
 
     SCRAPER --> WIKI[Wikipedia Pages]
 
